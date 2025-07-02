@@ -1,2 +1,2 @@
 # aib-rhadp-example
-Build RHIVOS on the RH Automotive Development Platform
+Build AutoSD on the RH Automotive Development Platform
