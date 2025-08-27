@@ -1,0 +1,17 @@
+schemaVersion: 2.3.0
+metadata:
+  name: aib-rhadp-example
+  tags:
+    - automotive
+    - rhivos
+    - jumpstarter
+components:
+  - name: runtime
+    container:
+      image: quay.io/rhadp/codespaces:latest
+      memoryLimit: "4Gi"
+      memoryRequest: "1Gi"
+      cpuLimit: "4"
+      cpuRequest: "1"
+      mountSources: true
+      
