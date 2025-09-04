@@ -22,10 +22,11 @@ commands:
   - id: configure-builder-client
     exec:
       component: runtime
+      workingDir: /home/user/.ssh
       commandLine: |
         # mounted builder private key is base64 encoded
-        base64 -d /home/user/.ssh/privateKey > /home/user/.ssh/id_rsa
-        chmod 600 /home/user/.ssh/id_rsa
+        base64 -d privateKey > id_rsa
+        chmod 600 id_rsa
         #ssh-keyscan -H localhost >> /home/user/.ssh/known_hosts
 
   - id: configure-jumpstarter-client
