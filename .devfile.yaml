@@ -24,9 +24,9 @@ commands:
       component: runtime
       commandLine: |
         # mounted builder private key is base64 encoded
-        echo /home/user/.ssh/privateKey | base64 -d > /home/user/.ssh/id_rsa
+        base64 -d /home/user/.ssh/privateKey > /home/user/.ssh/id_rsa
         chmod 600 /home/user/.ssh/id_rsa
-        ssh-keyscan -H localhost >> /home/user/.ssh/known_hosts
+        #ssh-keyscan -H localhost >> /home/user/.ssh/known_hosts
 
   - id: configure-jumpstarter-client
     exec:
@@ -59,4 +59,4 @@ commands:
 events:
   postStart:
     - configure-builder-client
-    - configure-jumpstarter-client
+    #- configure-jumpstarter-client
