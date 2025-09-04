@@ -60,4 +60,4 @@ commands:
 events:
   postStart:
     - configure-builder-client
-    - configure-jumpstarter-client
+    #- configure-jumpstarter-client
