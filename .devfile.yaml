@@ -23,11 +23,9 @@ commands:
     exec:
       component: runtime
       commandLine: |
-        # mounted builder private key is base64 encoded
-        base64 -d /home/tooling/.ssh/privateKey > /home/tooling/.config/builder-private-key
+        base64 -d /home/tooling/.ssh/privateKey > /home/tooling/.config/builder-private-key && \
         chmod 600 /home/tooling/.config/builder-private-key
-        #ssh-keyscan -H localhost >> /home/user/.ssh/known_hosts
-
+        
   - id: configure-jumpstarter-client
     exec:
       component: runtime
@@ -59,4 +57,4 @@ commands:
 events:
   postStart:
     - configure-builder-client
-    - configure-jumpstarter-client
+    #- configure-jumpstarter-client
