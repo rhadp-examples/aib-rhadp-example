@@ -25,8 +25,8 @@ commands:
       #workingDir: /home/user/.ssh
       commandLine: |
         # mounted builder private key is base64 encoded
-        base64 -d ~/.ssh/privateKey > ~/.config/builder
-        chmod 600 ~/.config/builder
+        base64 -d /user/tooling/.ssh/privateKey > /user/tooling/.config/builder
+        chmod 600 /user/tooling/.config/builder
         #ssh-keyscan -H localhost >> /home/user/.ssh/known_hosts
 
   - id: configure-jumpstarter-client
@@ -34,10 +34,10 @@ commands:
       component: runtime
       commandLine: |
         # create jumpstarter client config directories
-        mkdir -p ~/.config/jumpstarter/clients/
+        mkdir -p /user/tooling/.config/jumpstarter/clients/
 
         # generate jumpstarter user config
-        cat > ~/.config/jumpstarter/config.yaml <<EOF
+        cat > /user/tooling/.config/jumpstarter/config.yaml <<EOF
         apiVersion: jumpstarter.dev/v1alpha1
         kind: UserConfig
         config:
@@ -45,7 +45,7 @@ commands:
         EOF
 
         # generate jumpstarter client config
-        cat > ~/.config/jumpstarter/clients/default.yaml <<EOF
+        cat > /user/tooling/.config/jumpstarter/clients/default.yaml <<EOF
         apiVersion: jumpstarter.dev/v1alpha1
         kind: ClientConfig
         metadata:
