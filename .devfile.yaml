@@ -15,9 +15,12 @@ components:
       cpuRequest: "1"
       mountSources: true
       # environment variables
-      env:
-        - name: JUMPSTARTER_GRPC_INSECURE
-          value: "1"
+      #env:
+      #  - name: JUMPSTARTER_GRPC_ENDPOINT
+      #    value: "jmp.svc.cluster.local:8082"
+      #  - name: JUMPSTARTER_GRPC_INSECURE
+      #    value: "1"
+      #    value: "1"
 commands:
   - id: configure-builder-client
     exec:
@@ -30,32 +33,8 @@ commands:
   - id: configure-jumpstarter-client
     exec:
       component: runtime
-      commandLine: |
-        # create jumpstarter client config directories
-        mkdir -p /user/tooling/.config/jumpstarter/clients/
-
-        # generate jumpstarter user config
-        cat > /user/tooling/.config/jumpstarter/config.yaml <<EOF
-        apiVersion: jumpstarter.dev/v1alpha1
-        kind: UserConfig
-        config:
-          current-client: default
-        EOF
-
-        # generate jumpstarter client config
-        cat > /user/tooling/.config/jumpstarter/clients/default.yaml <<EOF
-        apiVersion: jumpstarter.dev/v1alpha1
-        kind: ClientConfig
-        metadata:
-          namespace: jumpstarter-qemu-exporter
-          name: $(sed "s|-devspaces||" /run/secrets/kubernetes.io/serviceaccount/namespace)
-        endpoint: $JUMPSTARTER_GRPC_ENDPOINT
-        token: $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
-        drivers:
-          allow: []
-          unsafe: true
-        EOF
+      commandLine: ./home/tooling/.scripts/init-jumpstarter
 events:
   postStart:
     - configure-builder-client
-    #- configure-jumpstarter-client
+    - configure-jumpstarter-client
