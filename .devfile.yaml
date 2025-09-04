@@ -14,4 +14,49 @@ components:
       cpuLimit: "4"
       cpuRequest: "1"
       mountSources: true
-      
+      # environment variables
+      env:
+        - name: JUMPSTARTER_GRPC_INSECURE
+          value: "1"
+commands:
+  - id: configure-builder-client
+    exec:
+      component: runtime
+      commandLine: |
+        # mounted builder private key is base64 encoded
+        echo /home/user/.ssh/privateKey | base64 -d > /home/user/.ssh/id_rsa
+        chmod 600 /home/user/.ssh/id_rsa
+        ssh-keyscan -H localhost >> /home/user/.ssh/known_hosts
+
+  - id: configure-jumpstarter-client
+    exec:
+      component: runtime
+      commandLine: |
+        # create jumpstarter client config directories
+        mkdir -p ~/.config/jumpstarter/clients/
+
+        # generate jumpstarter user config
+        cat > ~/.config/jumpstarter/config.yaml <<EOF
+        apiVersion: jumpstarter.dev/v1alpha1
+        kind: UserConfig
+        config:
+          current-client: default
+        EOF
+
+        # generate jumpstarter client config
+        cat > ~/.config/jumpstarter/clients/default.yaml <<EOF
+        apiVersion: jumpstarter.dev/v1alpha1
+        kind: ClientConfig
+        metadata:
+          namespace: jumpstarter-qemu-exporter
+          name: $(sed "s|-devspaces||" /run/secrets/kubernetes.io/serviceaccount/namespace)
+        endpoint: ${{ values.jumpstarter_host }}
+        token: $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+        drivers:
+          allow: []
+          unsafe: true
+        EOF
+events:
+  postStart:
+    - configure-builder-client
+    - configure-jumpstarter-client
