@@ -22,7 +22,6 @@ commands:
   - id: configure-builder-client
     exec:
       component: runtime
-      #workingDir: /home/user/.ssh
       commandLine: |
         # mounted builder private key is base64 encoded
         base64 -d /home/tooling/.ssh/privateKey > /home/tooling/.config/builder-private-key
@@ -51,7 +50,7 @@ commands:
         metadata:
           namespace: jumpstarter-qemu-exporter
           name: $(sed "s|-devspaces||" /run/secrets/kubernetes.io/serviceaccount/namespace)
-        endpoint: ${{ values.jumpstarter_host }}
+        endpoint: $JUMPSTARTER_GRPC_ENDPOINT
         token: $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)
         drivers:
           allow: []
@@ -60,4 +59,4 @@ commands:
 events:
   postStart:
     - configure-builder-client
-    #- configure-jumpstarter-client
+    - configure-jumpstarter-client
