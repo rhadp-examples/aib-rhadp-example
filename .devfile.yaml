@@ -33,7 +33,8 @@ commands:
   - id: configure-jumpstarter-client
     exec:
       component: runtime
-      commandLine: ./home/tooling/.scripts/init-jumpstarter
+      commandLine: | 
+        /home/tooling/.scripts/init-jumpstarter
 events:
   postStart:
     - configure-builder-client

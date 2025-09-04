@@ -9,5 +9,5 @@
             }
         }
     },
-    "postCreateCommand": "mkdir -p ~/.ssh && echo '${{ secrets.BUILDER_PRIVATE_KEY }}' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa && ssh-keyscan -H localhost >> ~/.ssh/known_hosts"
+    "postCreateCommand": "mkdir -p ~/.ssh && echo $BUILDER_PRIVATE_KEY > ~/.ssh/builder-private-key && chmod 600 ~/.ssh/builder-private-key"
 }
