@@ -25,7 +25,8 @@ commands:
   - id: init-workspace
     exec:
       component: runtime
-      commandLine: ./init-workspace
+      commandLine: |
+        /home/tooling/init-workspace
 events:
   postStart:
     - init-workspace
