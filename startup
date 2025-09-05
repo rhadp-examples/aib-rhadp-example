@@ -17,6 +17,10 @@ if [ -d ".scripts" ]; then
 fi
 [ -z "$scripts" ] && { echo "no init scripts found"; exit 0; }
 
+echo "scripts: $scripts"
+exit 0
+
+
 for script in $scripts; do
     if [ -x "$script" ]; then
         echo "running: $script..."
