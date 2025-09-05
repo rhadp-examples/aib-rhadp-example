@@ -28,5 +28,5 @@ commands:
       commandLine: |
         /home/tooling/.scripts/init-workspace
 events:
-  postStart:
+  preStart:
     - init-workspace
