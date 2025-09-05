@@ -25,24 +25,8 @@ commands:
   - id: init-workspace
     exec:
       component: runtime
-      commandLine: |
-        . startup
-
-  - id: configure-builder-client
-    exec:
-      component: runtime
-      commandLine: |
-        base64 -d /home/tooling/.ssh/privateKey > /home/tooling/.config/builder-private-key && \
-        chmod 600 /home/tooling/.config/builder-private-key && \
-        cp /home/tooling/.config/builder-private-key /home/user/.ssh/builder-private-key
-        
-  - id: configure-jumpstarter-client
-    exec:
-      component: runtime
-      commandLine: | 
-        /home/tooling/.scripts/init-jumpstarter
+      commandLine: ./startup
 events:
   postStart:
     - init-workspace
-    #- configure-jumpstarter-client
-    #- configure-env-variables
+    
