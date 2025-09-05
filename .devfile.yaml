@@ -22,11 +22,14 @@ components:
       #    value: "1"
       #    value: "1"
 commands:
+  - id: init
+    apply:
+      component: tools
   - id: init-workspace
     exec:
-      component: runtime
+      component: tools
       commandLine: |
         /home/tooling/.scripts/init-workspace
 events:
   preStart:
-    - init-workspace
+    - init
