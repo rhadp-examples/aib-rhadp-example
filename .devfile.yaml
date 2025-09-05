@@ -42,6 +42,6 @@ commands:
         /home/tooling/.scripts/init-jumpstarter
 events:
   postStart:
-    - configure-builder-client
-    #- configure-jumpstarter-client
+    #- configure-builder-client
+    - configure-jumpstarter-client
     #- configure-env-variables
