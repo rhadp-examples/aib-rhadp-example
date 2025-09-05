@@ -22,10 +22,11 @@ components:
       #    value: "1"
       #    value: "1"
 commands:
-  - id: configure-env-variables
+  - id: init-workspace
     exec:
       component: runtime
-      commandLine: source .env
+      commandLine: |
+        . startup
 
   - id: configure-builder-client
     exec:
@@ -42,6 +43,6 @@ commands:
         /home/tooling/.scripts/init-jumpstarter
 events:
   postStart:
-    #- configure-builder-client
+    - init-workspace
     #- configure-jumpstarter-client
-    - configure-env-variables
+    #- configure-env-variables

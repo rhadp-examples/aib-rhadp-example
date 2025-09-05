@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Execute all scripts in .scripts folder
+set -e
+
+SCRIPTS_DIR="${SCRIPTS_DIR:-/home/user/tooling/.scripts}"
+
+[ ! -d "$SCRIPTS_DIR" ] && { echo "error: $SCRIPTS_DIR not found"; exit 1; }
+
+scripts=$(find "$SCRIPTS_DIR" -type f | sort)
+[ -z "$scripts" ] && { echo "no init scripts found"; exit 0; }
+
+for script in $scripts; do
+    if [ -x "$script" ]; then
+        echo "running: $script..."
+        ./"$script" || { echo "Error: $script failed with exit code $?"; exit 1; }
+    else
+        echo "skipping: $script"
+    fi
+done
