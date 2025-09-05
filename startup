@@ -5,6 +5,8 @@ set -e
 
 SCRIPTS_DIR="${SCRIPTS_DIR:-/home/tooling/.scripts}"
 
+exit 0
+
 [ ! -d "$SCRIPTS_DIR" ] && { echo "error: $SCRIPTS_DIR not found"; exit 0; }
 
 # Collect scripts from main SCRIPTS_DIR
