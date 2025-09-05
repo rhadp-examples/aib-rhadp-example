@@ -5,10 +5,13 @@ set -e
 
 SCRIPTS_DIR="${SCRIPTS_DIR:-/home/tooling/.scripts}"
 
-[ ! -d "$SCRIPTS_DIR" ] && { echo "error: $SCRIPTS_DIR not found"; exit 1; }
+[ ! -d "$SCRIPTS_DIR" ] && { echo "error: $SCRIPTS_DIR not found"; exit 0; }
 
 # Collect scripts from main SCRIPTS_DIR
 scripts=$(find "$SCRIPTS_DIR" -type f | sort)
+
+echo "scripts: $scripts"
+exit 0
 
 # Add scripts from local .scripts directory if it exists
 if [ -d ".scripts" ]; then
