@@ -22,6 +22,11 @@ components:
       #    value: "1"
       #    value: "1"
 commands:
+  - id: configure-env-variables
+    exec:
+      component: runtime
+      commandLine: source .env
+
   - id: configure-builder-client
     exec:
       component: runtime
@@ -39,3 +44,4 @@ events:
   postStart:
     - configure-builder-client
     - configure-jumpstarter-client
+    - configure-env-variables
