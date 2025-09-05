@@ -18,13 +18,10 @@ components:
       env:
         - name: JUMPSTARTER_GRPC_ENDPOINT
           value: "jmp.svc.cluster.local:8082"
-      #  - name: JUMPSTARTER_GRPC_INSECURE
-      #    value: "1"
-      #    value: "1"
 commands:
   - id: init-workspace
     exec:
-      component: tools
+      component: runtime
       commandLine: |
         /home/tooling/.scripts/init-workspace
 events:
