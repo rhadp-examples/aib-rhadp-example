@@ -43,5 +43,5 @@ commands:
 events:
   postStart:
     #- configure-builder-client
-    - configure-jumpstarter-client
-    #- configure-env-variables
+    #- configure-jumpstarter-client
+    - configure-env-variables
